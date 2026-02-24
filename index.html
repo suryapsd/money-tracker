@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker AI - Kelola Keuangan dengan Kecerdasan Buatan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#38bdf8',
+                        accent: '#f472b6',
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Animasi melayang yang halus untuk image */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">MoneyTracker AI</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#about" class="hover:text-secondary transition">Tentang</a>
+                    <a href="#fitur" class="hover:text-secondary transition">Fitur</a>
+                    <a href="#testimoni" class="hover:text-secondary transition">Testimoni</a>
+                    <a href="#faq" class="hover:text-secondary transition">FAQ</a>
+                </div>
+                <div>
+                    <a href="#cta" class="bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg">Mulai Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-wider">Solusi Keuangan Masa Kini</span>
+            <h1 data-aos="fade-up" data-aos-delay="200" class="mt-6 text-4xl md:text-6xl font-extrabold text-primary leading-tight">
+                Catat Keuangan Lewat Chat <br> <span class="text-secondary">AI Akan Mengurus Sisanya.</span>
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="400" class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Lupakan aplikasi rumit. Cukup kirim teks, foto struk, atau voice note ke Bot Telegram. Data otomatis tersusun rapi di Google Sheets & Dashboard Visual Anda.
+            </p>
+            <div data-aos="zoom-in" data-aos-delay="600" class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#cta" class="bg-secondary text-white px-8 py-4 rounded-xl font-bold shadow-xl shadow-secondary/20 hover:scale-105 transition transform">Dapatkan Lisensi Lifetime</a>
+                <a href="#demo" class="bg-white border border-slate-200 text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition">Lihat Cara Kerja</a>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="800" class="mt-16 relative">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" 
+                    alt="Dashboard Preview" 
+                    class="rounded-2xl shadow-2xl mx-auto border border-slate-200 floating-anim">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-primary text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold">Kenapa Kebanyakan Orang <br> Gagal Mengatur Keuangan?</h2>
+                    <div class="mt-8 space-y-6">
+                        <div class="flex items-start gap-4" data-aos="fade-right" data-aos-delay="200">
+                            <div class="bg-red-500/20 p-2 rounded-lg text-red-400"><i class="fas fa-times-circle"></i></div>
+                            <p class="text-slate-400"><span class="text-white font-semibold">Malas Mengetik:</span> Ribet harus buka aplikasi dan isi banyak kolom.</p>
+                        </div>
+                        <div class="flex items-start gap-4" data-aos="fade-right" data-aos-delay="400">
+                            <div class="bg-red-500/20 p-2 rounded-lg text-red-400"><i class="fas fa-times-circle"></i></div>
+                            <p class="text-slate-400"><span class="text-white font-semibold">Struk Menumpuk:</span> Malas menghitung manual setiap belanjaan.</p>
+                        </div>
+                        <div class="flex items-start gap-4" data-aos="fade-right" data-aos-delay="600">
+                            <div class="bg-red-500/20 p-2 rounded-lg text-red-400"><i class="fas fa-times-circle"></i></div>
+                            <p class="text-slate-400"><span class="text-white font-semibold">Data Berantakan:</span> Tidak punya visualisasi yang jelas ke mana uang pergi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/10" data-aos="fade-left">
+                    <h2 class="text-3xl font-bold text-secondary">Solusi MoneyTracker AI</h2>
+                    <p class="mt-4 text-slate-300">Kami menggabungkan kemudahan chatting dengan kekuatan Google Sheets & AI.</p>
+                    <ul class="mt-8 space-y-4">
+                        <li class="flex items-center gap-3" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-check-circle text-secondary"></i> Tanpa Install Aplikasi Tambahan</li>
+                        <li class="flex items-center gap-3" data-aos="zoom-in" data-aos-delay="500"><i class="fas fa-check-circle text-secondary"></i> Input Data Secepat Kilat</li>
+                        <li class="flex items-center gap-3" data-aos="zoom-in" data-aos-delay="700"><i class="fas fa-check-circle text-secondary"></i> Laporan Otomatis Real-time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fitur" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-primary">Fitur Unggulan Seumur Hidup</h2>
+                <p class="text-slate-600 mt-4">Sekali bayar, nikmati kemudahan selamanya.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div data-aos="flip-left" data-aos-delay="100" class="p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 hover:border-secondary transition group">
+                    <div class="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary text-2xl group-hover:bg-secondary group-hover:text-white transition">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="mt-6 font-bold text-xl">AI Smart Entry</h3>
+                    <p class="mt-3 text-slate-600">Catat belanja lewat Teks, Foto Struk, hingga Voice Note. AI paham kategori & nominalnya otomatis.</p>
+                </div>
+                <div data-aos="flip-left" data-aos-delay="300" class="p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 hover:border-secondary transition group">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent text-2xl group-hover:bg-accent group-hover:text-white transition">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="mt-6 font-bold text-xl">Visual Dashboard</h3>
+                    <p class="mt-3 text-slate-600">Grafik Donat, Bar Chart, dan Rekapitulasi Otomatis tersedia langsung di Google Sheets Anda.</p>
+                </div>
+                <div data-aos="flip-left" data-aos-delay="500" class="p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 hover:border-secondary transition group">
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-2xl group-hover:bg-green-600 group-hover:text-white transition">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="mt-6 font-bold text-xl">Export & Undo</h3>
+                    <p class="mt-3 text-slate-600">Export laporan ke Excel asli atau batalkan salah catat dengan perintah <code>/undo</code> semudah itu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-24 px-4 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl font-extrabold text-primary">Intip Cara Kerjanya</h2>
+            <p class="text-slate-600 mt-4 text-lg max-w-2xl mx-auto">Saksikan bagaimana AI mengubah chat sederhana Anda menjadi laporan keuangan profesional secara real-time.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right" class="relative">
+                <div class="absolute -z-10 -top-10 -left-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
+                
+                <h3 class="text-2xl font-bold text-primary mb-8 flex items-center">
+                    <span class="min-w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center mr-3 shadow-lg shadow-secondary/30 text-sm">1</span>
+                    Kirim Chat, AI Beraksi
+                </h3>
+                
+                <div class="bg-slate-50 p-8 rounded-[2rem] border border-slate-200 shadow-2xl relative">
+                    <div class="flex justify-end mb-6" data-aos="fade-left" data-aos-delay="400">
+                        <div class="bg-secondary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg">
+                            <p class="text-sm font-medium">Beli nasi goreng 25rb sama parkir 2rb</p>
+                            <span class="text-[10px] opacity-70 block text-right mt-1">14:02</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-start" data-aos="fade-right" data-aos-delay="800">
+                        <div class="bg-white p-5 rounded-2xl rounded-tl-none max-w-[90%] shadow-xl border border-slate-100 ring-1 ring-black/5">
+                            <div class="flex items-center mb-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
+                                <p class="text-xs font-bold text-green-600 uppercase tracking-wider">Berhasil Dicatat!</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-2 mt-2">
+                                <div class="flex justify-between text-[11px]"><span class="text-slate-400">🏪 Toko:</span><span class="font-semibold">Manual Input</span></div>
+                                <div class="flex justify-between text-[11px]"><span class="text-slate-400">📌 Item:</span><span class="font-semibold">Nasi Goreng, Parkir</span></div>
+                                <div class="flex justify-between text-[11px]"><span class="text-slate-400">💰 Total:</span><span class="font-bold text-red-500">-Rp27.000</span></div>
+                                <div class="flex justify-between text-[11px]"><span class="text-slate-400">📂 Kategori:</span><span class="px-2 py-0.5 bg-slate-100 rounded text-primary font-bold">Makanan & Minuman</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-8 text-slate-600 leading-relaxed italic border-l-4 border-secondary/30 pl-4">
+                    AI secara cerdas mengekstrak nominal dan menentukan kategori berdasarkan daftar kategori dinamis yang Anda tentukan sendiri di sheet.
+                </p>
+            </div>
+
+            <div data-aos="fade-left" class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-secondary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                <div class="relative bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+                    <div class="bg-slate-100 px-4 py-2 border-b border-slate-200 flex items-center">
+                        <div class="flex space-x-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        </div>
+                        <span class="ml-4 text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest">Live Transaction Log</span>
+                    </div>
+                    <img src="/assets/Screenshot 2026-02-24 153358.png" alt="Tabel Transaksi" class="w-full transform group-hover:scale-[1.02] transition duration-700">
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-primary text-white p-4 rounded-xl shadow-2xl hidden md:block" data-aos="zoom-in" data-aos-delay="1000">
+                    <p class="text-[10px] font-bold uppercase tracking-tighter opacity-60">Auto-filled data</p>
+                    <p class="text-xs font-semibold">Struktur Data Rapi & Akurat</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-32 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1 relative" data-aos="zoom-in-right">
+                <div class="absolute -z-10 -bottom-10 -right-10 w-48 h-48 bg-accent/5 rounded-full blur-3xl"></div>
+                <div class="bg-slate-900 p-2 rounded-[2.5rem] shadow-[0_20px_50px_rgba(8,_112,_184,_0.1)] overflow-hidden">
+                    <img src="/assets/Screenshot 2026-02-24 153358.png" alt="Dashboard Report" class="rounded-[2.2rem] w-full transform hover:scale-105 transition duration-700">
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2" data-aos="fade-left">
+                <h3 class="text-3xl font-bold text-primary mb-8 flex items-center">
+                    <span class="min-w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center mr-3 shadow-lg shadow-accent/30 text-sm">2</span>
+                    Visualisasi Dashboard Real-time
+                </h3>
+                <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                    Ubah tumpukan data menjadi wawasan yang berharga. Pantau kesehatan finansial Anda dengan grafis yang otomatis terupdate.
+                </p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 group-hover:bg-green-500 group-hover:text-white transition">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-primary">Donut Chart</p>
+                            <p class="text-xs text-slate-500">Distribusi pengeluaran per kategori otomatis.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 group-hover:bg-secondary group-hover:text-white transition">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-primary">Bar Chart</p>
+                            <p class="text-xs text-slate-500">Bandingkan tren pemasukan & pengeluaran bulanan.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition">
+                            <i class="fas fa-filter"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-primary">Filter Dinamis</p>
+                            <p class="text-xs text-slate-500">Analisis periode spesifik hanya dengan sekali klik.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl font-extrabold text-primary">Investasi Terbaik Untuk Finansial Anda</h2>
+            <p class="mt-4 text-slate-500">Paket lengkap yang Anda dapatkan saat membeli lisensi hari ini.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-white hover:-translate-y-3 transition duration-500 group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary transition duration-500">
+                    <i class="fas fa-robot text-2xl text-secondary group-hover:text-white transition"></i>
+                </div>
+                <h4 class="font-bold text-lg text-primary mb-3">Bot Telegram AI</h4>
+                <p class="text-sm text-slate-500 leading-relaxed">Asisten pribadi 24/7 yang siap mencatat setiap rupiah pengeluaran Anda.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-white hover:-translate-y-3 transition duration-500 group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent transition duration-500">
+                    <i class="fas fa-table text-2xl text-accent group-hover:text-white transition"></i>
+                </div>
+                <h4 class="font-bold text-lg text-primary mb-3">Master Spreadsheet</h4>
+                <p class="text-sm text-slate-500 leading-relaxed">Template Google Sheets premium dengan dashboard otomatis yang sudah siap pakai.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-white hover:-translate-y-3 transition duration-500 group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-yellow-500 transition duration-500">
+                    <i class="fas fa-video text-2xl text-yellow-600 group-hover:text-white transition"></i>
+                </div>
+                <h4 class="font-bold text-lg text-primary mb-3">Video Tutorial</h4>
+                <p class="text-sm text-slate-500 leading-relaxed">Panduan langkah-demi-langkah setup cepat kurang dari 5 menit untuk pemula.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-white hover:-translate-y-3 transition duration-500 group" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition duration-500">
+                    <i class="fas fa-headset text-2xl text-green-600 group-hover:text-white transition"></i>
+                </div>
+                <h4 class="font-bold text-lg text-primary mb-3">Support Grup</h4>
+                <p class="text-sm text-slate-500 leading-relaxed">Akses ke komunitas eksklusif dan bantuan teknis langsung dari admin.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="testimoni" class="py-20 bg-slate-100 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-16" data-aos="fade-up">Apa Kata Mereka?</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex gap-1 text-yellow-400 mb-4 text-sm justify-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic text-slate-600">"Dulu struk belanja numpuk di dompet, sekarang tinggal foto langsung beres tercatat. Dashboard Excel-nya keren banget!"</p>
+                    <p class="mt-6 font-bold">- Andi, Pengusaha Muda</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="flex gap-1 text-yellow-400 mb-4 text-sm justify-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic text-slate-600">"Paling suka fitur Voice Note-nya. Sambil nyetir tinggal ngomong 'bensin 150rb', langsung masuk Sheets."</p>
+                    <p class="mt-6 font-bold">- Maya, Freelancer</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="flex gap-1 text-yellow-400 mb-4 text-sm justify-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic text-slate-600">"Akses Lifetime-nya worth it banget. Tanpa biaya langganan bulanan, fitur AI-nya pinter banget."</p>
+                    <p class="mt-6 font-bold">- Roni, Ibu Rumah Tangga</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="py-20 px-4">
+        <div data-aos="zoom-out" class="max-w-4xl mx-auto bg-gradient-to-br from-primary to-slate-800 rounded-[3rem] p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+            <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight">Mulai Kelola Keuangan <br> dengan Cara Pintar</h2>
+            <p class="mt-6 text-slate-300">Dapatkan Lisensi Lifetime hari ini. Harga spesial untuk 50 pembeli pertama.</p>
+            
+            <div class="mt-12 inline-block bg-white/5 border border-white/10 p-8 rounded-3xl text-white">
+                <span class="text-sm uppercase tracking-widest text-secondary font-bold">LIFETIME LICENSE</span>
+                <div class="mt-4 flex items-center justify-center gap-2">
+                    <span class="text-2xl text-slate-400 line-through">Rp 499k</span>
+                    <span class="text-5xl font-extrabold text-white">Rp 199k</span>
+                </div>
+                <ul class="mt-8 space-y-4 text-left text-sm text-slate-300">
+                    <li><i class="fas fa-check text-green-400 mr-2"></i> Script Money Tracker AI Pro</li>
+                    <li><i class="fas fa-check text-green-400 mr-2"></i> Template Dashboard Google Sheets Pro</li>
+                    <li><i class="fas fa-check text-green-400 mr-2"></i> Akses Selamanya (Bebas Biaya Bulanan)</li>
+                    <li><i class="fas fa-check text-green-400 mr-2"></i> Panduan Lengkap & Support Admin</li>
+                </ul>
+                <a href="https://wa.me/628123456789" target="_blank" class="mt-10 block bg-secondary text-white py-4 px-4 rounded-xl font-bold text-lg hover:scale-105 transition shadow-lg shadow-secondary/20 active:scale-95">Daftar Sekarang Melalui WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 px-4 max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Pertanyaan Populer</h2>
+        <div class="space-y-4">
+            <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm p-6" data-aos="fade-up" data-aos-delay="100">
+                <summary class="font-bold flex justify-between items-center cursor-pointer list-none">
+                    <span>Apakah saya butuh keahlian IT/Coding?</span>
+                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                </summary>
+                <p class="mt-4 text-slate-600 leading-relaxed">Sama sekali tidak. Anda hanya perlu menduplikat spreadsheet dan melakukan setup awal sesuai panduan video yang kami sediakan.</p>
+            </details>
+            <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm p-6" data-aos="fade-up" data-aos-delay="200">
+                <summary class="font-bold flex justify-between items-center cursor-pointer list-none">
+                    <span>Di mana data saya disimpan?</span>
+                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                </summary>
+                <p class="mt-4 text-slate-600 leading-relaxed">Data Anda 100% tersimpan di Google Sheets pribadi Anda. Kami tidak memiliki akses ke angka-angka keuangan Anda.</p>
+            </details>
+            <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm p-6" data-aos="fade-up" data-aos-delay="300">
+                <summary class="font-bold flex justify-between items-center cursor-pointer list-none">
+                    <span>Apakah ada biaya bulanan?</span>
+                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                </summary>
+                <p class="mt-4 text-slate-600 leading-relaxed">Tidak ada. Lisensi ini berlaku selamanya (Lifetime). Anda hanya membayar sekali di awal.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <span class="text-2xl font-bold bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">MoneyTracker AI</span>
+            <p class="mt-4 text-slate-500 text-sm">© 2026 MoneyTracker AI - Powered by Gemini AI & Google Sheets.</p>
+            <div class="mt-6 flex justify-center space-x-6 text-slate-400">
+                <a href="#" class="hover:text-secondary"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-secondary"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-secondary"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS
+        AOS.init({
+            duration: 800, // Durasi animasi dalam milidetik
+            once: true, // Animasi hanya berjalan sekali saat scroll ke bawah
+            offset: 100, // Jarak elemen dari layar sebelum animasi mulai
+        });
+    </script>
+</body>
+</html>
