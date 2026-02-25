@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Pembayaran - Sakuin AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: '#0f172a', secondary: '#38bdf8' } } }
+        }
+    </script>
+    <style>
+        @keyframes scaleIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .animate-scale { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-xl w-full text-center bg-white rounded-[2rem] shadow-2xl p-8 md:p-16 border border-slate-100">
+            
+            <div id="loadingState" class="block">
+                <div class="animate-spin text-secondary text-5xl mb-6 mx-auto w-fit"><i class="fas fa-circle-notch"></i></div>
+                <h2 class="text-2xl font-bold text-primary">Mengecek Pembayaran...</h2>
+                <p class="text-slate-500 mt-2 text-sm">Mohon tunggu sebentar, kami sedang memverifikasi invoice Anda.</p>
+            </div>
+
+            <div id="successState" class="hidden">
+                <div class="flex justify-center mb-8">
+                    <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-5xl animate-scale">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-extrabold text-primary leading-tight">Pembayaran Berhasil!</h1>
+                <p class="mt-4 text-slate-600 leading-relaxed">Terima kasih! Lisensi <b id="displayOrderId"></b> Anda telah lunas. Kini Anda bisa mengelola keuangan dengan pintar.</p>
+
+                <div class="mt-10 p-6 bg-slate-50 rounded-3xl border border-slate-100 text-left">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Langkah Selanjutnya:</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="min-w-6 h-6 bg-secondary text-white rounded-full flex items-center justify-center text-xs mt-0.5">1</span>
+                            <p class="text-sm text-slate-700">Cek kotak masuk/spam <b>Email Anda</b> untuk melihat panduan aktivasi.</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="min-w-6 h-6 bg-secondary text-white rounded-full flex items-center justify-center text-xs mt-0.5">2</span>
+                            <p class="text-sm text-slate-700">Kirimkan pesan ke bot kami dengan format: <br><code class="bg-slate-200 px-2 py-1 rounded text-primary mt-1 inline-block">/start [Nomor_Invoice] [Link_Sheet]</code></p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-10 space-y-4">
+                    <a href="https://t.me/SakuinAIBot" class="block bg-primary text-white py-4 rounded-2xl font-bold text-lg hover:bg-slate-800 transition">Buka Bot Telegram</a>
+                </div>
+            </div>
+
+            <div id="errorState" class="hidden">
+                <div class="flex justify-center mb-8">
+                    <div class="w-24 h-24 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-5xl">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <h1 class="text-2xl font-extrabold text-primary leading-tight">Menunggu Pembayaran</h1>
+                <p class="mt-4 text-slate-600 text-sm">Status invoice Anda saat ini masih <b>PENDING</b>. Jika Anda sudah mentransfer, sistem mungkin butuh waktu 1-2 menit untuk verifikasi.</p>
+                <button onclick="window.location.reload()" class="mt-8 bg-slate-200 text-slate-700 py-3 px-8 rounded-xl font-bold hover:bg-slate-300 transition">Cek Ulang Status</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // 1. MASUKKAN URL WEB APP APPS SCRIPT ANDA DI SINI
+        const API_URL = "https://script.google.com/macros/s/AKfycbwDbilg80HY2PuC3WcFxi1OVbuqlkZmh1077j-n2q8OhV7Pqe8E3W8Hl6n2BR3mMFB3/exec"; 
+
+        window.onload = async function() {
+            // Ambil order_id dari URL (contoh: ?order_id=INV-123)
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order_id');
+
+            const loadingUI = document.getElementById('loadingState');
+            const successUI = document.getElementById('successState');
+            const errorUI = document.getElementById('errorState');
+
+            if (!orderId) {
+                loadingUI.classList.add('hidden');
+                errorUI.classList.remove('hidden');
+                errorUI.querySelector('h1').innerText = "Invoice Tidak Ditemukan";
+                errorUI.querySelector('p').innerText = "Link yang Anda buka tidak valid atau tidak memiliki Nomor Order.";
+                return;
+            }
+
+            try {
+                // Tembak API Apps Script kita untuk cek status
+                const response = await fetch(`${API_URL}?action=check_status&order_id=${orderId}`);
+                const data = await response.json();
+
+                loadingUI.classList.add('hidden');
+
+                if (data.status === "Success" || data.status === "completed") {
+                    // JIKA LUNAS
+                    document.getElementById('displayOrderId').innerText = orderId;
+                    successUI.classList.remove('hidden');
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#38bdf8', '#f472b6', '#0f172a'] });
+                } else {
+                    // JIKA PENDING / BELUM BAYAR
+                    errorUI.classList.remove('hidden');
+                }
+            } catch (err) {
+                loadingUI.classList.add('hidden');
+                errorUI.classList.remove('hidden');
+                errorUI.querySelector('p').innerText = "Gagal menghubungi server. Silakan muat ulang halaman ini.";
+            }
+        };
+    </script>
+</body>
+</html>
